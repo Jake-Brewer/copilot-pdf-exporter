@@ -47,11 +47,19 @@ $ playwright install
 python export_copilot_pdfs.py --save-dir "C:/path/to/save"
 ```
 
-### Example
+### More Usage Examples
 
-```sh
-python export_copilot_pdfs.py --save-dir "C:/Users/YourName/Documents/CopilotPDFs"
-```
+- Save to a custom directory:
+
+  ```sh
+  python export_copilot_pdfs.py --save-dir "D:/Backups/CopilotPDFs"
+  ```
+
+- Use the default directory:
+
+  ```sh
+  python export_copilot_pdfs.py
+  ```
 
 ---
 
@@ -63,9 +71,32 @@ python export_copilot_pdfs.py --save-dir "C:/Users/YourName/Documents/CopilotPDF
 
 ---
 
+## 🛠️ Troubleshooting
+
+- **Playwright not installed:**
+  - Run `pip install -r requirements.txt` and `playwright install`.
+- **Chromium not found:**
+  - Run `playwright install` to ensure all browsers are available.
+- **Permission errors on save:**
+  - Make sure the save directory exists and you have write permissions.
+- **Selector not found errors:**
+  - The Copilot UI may have changed. Open the required panels or update selectors in the script.
+- **Other issues:**
+  - Check the [issues page](https://github.com/Jake-Brewer/copilot-pdf-exporter/issues) or open a new issue for help.
+
+---
+
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Jake-Brewer/copilot-pdf-exporter/issues) or submit a pull request.
+Contributions, issues, and feature requests are welcome!
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a pull request
+
+Please ensure your code follows the project style and passes all tests before submitting.
 
 ---
 

@@ -15,7 +15,7 @@ Usage:
 import argparse
 import asyncio
 from pathlib import Path
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, Page
 
 # 1. Configuration
 # SAVE_DIR = Path("C:/Users/Jake/Documents/CopilotPDFs")
@@ -29,31 +29,33 @@ SELECTORS = {
 }
 
 
-def wait_for_or_prompt_docstring():
+def wait_for_or_prompt_docstring() -> None:
     """Helper to wait for a selector or prompt user to retry if not found."""
     pass
 
 
-def export_all_docstring():
+def export_all_docstring() -> None:
     """Core export routine to save all Copilot conversations as PDFs."""
     pass
 
 
-def main_docstring():
+def main_docstring() -> None:
     """CLI entry point for the Copilot PDF exporter script."""
     pass
 
 
 # 2. Helper to wait for a selector or prompt retry
-async def wait_for_or_prompt(page, selector, description, timeout=5000):
+async def wait_for_or_prompt(
+    page: Page, selector: str, description: str, timeout: int = 5000
+) -> None:
     """
     Wait for a selector to appear on the page, or prompt the user to fix the UI and retry.
 
     Args:
-        page: Playwright page object.
-        selector: CSS selector to wait for.
-        description: Human-readable description of the element.
-        timeout: Timeout in milliseconds.
+        page (Page): Playwright page object.
+        selector (str): CSS selector to wait for.
+        description (str): Human-readable description of the element.
+        timeout (int): Timeout in milliseconds.
     """
     while True:
         try:
@@ -69,12 +71,12 @@ async def wait_for_or_prompt(page, selector, description, timeout=5000):
 
 
 # 3. Core export routine
-async def export_all(SAVE_DIR):
+async def export_all(SAVE_DIR: Path) -> None:
     """
     Export all Copilot conversations to PDF files in the specified directory.
 
     Args:
-        SAVE_DIR: Path object for the directory to save PDFs.
+        SAVE_DIR (Path): Directory to save PDFs.
     """
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=False)
@@ -142,7 +144,7 @@ async def export_all(SAVE_DIR):
 
 
 # 4. CLI and scheduling
-def main():
+def main() -> None:
     """
     Parse command-line arguments and run the export routine.
     """
@@ -158,7 +160,7 @@ def main():
     save_dir = Path(args.save_dir)
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    async def export_all_with_dir():
+    async def export_all_with_dir() -> None:
         await export_all(save_dir)
 
     asyncio.run(export_all_with_dir())
