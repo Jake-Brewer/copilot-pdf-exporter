@@ -1,5 +1,19 @@
-import asyncio
+"""
+export_copilot_pdfs.py
+
+Export all Microsoft Copilot conversations to PDF using Playwright automation.
+
+Features:
+- Exports all conversations from Copilot web UI to PDF
+- Configurable save directory
+- Robust UI interaction with retry prompts
+
+Usage:
+    python export_copilot_pdfs.py --save-dir "C:/path/to/save"
+"""
+
 import argparse
+import asyncio
 from pathlib import Path
 from playwright.async_api import async_playwright
 
@@ -15,14 +29,40 @@ SELECTORS = {
 }
 
 
+def wait_for_or_prompt_docstring():
+    """Helper to wait for a selector or prompt user to retry if not found."""
+    pass
+
+
+def export_all_docstring():
+    """Core export routine to save all Copilot conversations as PDFs."""
+    pass
+
+
+def main_docstring():
+    """CLI entry point for the Copilot PDF exporter script."""
+    pass
+
+
 # 2. Helper to wait for a selector or prompt retry
 async def wait_for_or_prompt(page, selector, description, timeout=5000):
+    """
+    Wait for a selector to appear on the page, or prompt the user to fix the UI and retry.
+
+    Args:
+        page: Playwright page object.
+        selector: CSS selector to wait for.
+        description: Human-readable description of the element.
+        timeout: Timeout in milliseconds.
+    """
     while True:
         try:
             await page.wait_for_selector(selector, timeout=timeout)
             return
         except Exception as e:
-            print(f"Could not find {description} (selector: {selector}). Exception: {e}")
+            print(
+                f"Could not find {description} (selector: {selector}). Exception: {e}"
+            )
             input(
                 "Please fix the UI (open panels, scroll history, etc.) then press ENTER to retry..."
             )
@@ -30,6 +70,12 @@ async def wait_for_or_prompt(page, selector, description, timeout=5000):
 
 # 3. Core export routine
 async def export_all(SAVE_DIR):
+    """
+    Export all Copilot conversations to PDF files in the specified directory.
+
+    Args:
+        SAVE_DIR: Path object for the directory to save PDFs.
+    """
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=False)
         page = await browser.new_page()
@@ -73,7 +119,9 @@ async def export_all(SAVE_DIR):
             try:
                 raw = await page.locator(SELECTORS["convo_title"]).inner_text()
             except Exception as e:
-                print(f"Could not get conversation title for chat {idx+1}. Exception: {e}")
+                print(
+                    f"Could not get conversation title for chat {idx+1}. Exception: {e}"
+                )
                 raw = f"chat_{idx+1}"
             safe = "".join(c for c in raw if c.isalnum() or c in " _-").strip()[:40]
             name = f"{idx+1:03d}_{safe}.pdf"
@@ -95,6 +143,9 @@ async def export_all(SAVE_DIR):
 
 # 4. CLI and scheduling
 def main():
+    """
+    Parse command-line arguments and run the export routine.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--save-dir",
