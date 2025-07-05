@@ -21,8 +21,8 @@ async def wait_for_or_prompt(page, selector, description, timeout=5000):
         try:
             await page.wait_for_selector(selector, timeout=timeout)
             return
-        except:
-            print(f"Could not find {description} (selector: {selector}).")
+        except Exception as e:
+            print(f"Could not find {description} (selector: {selector}). Exception: {e}")
             input(
                 "Please fix the UI (open panels, scroll history, etc.) then press ENTER to retry..."
             )
@@ -72,7 +72,8 @@ async def export_all(SAVE_DIR):
             # derive filename
             try:
                 raw = await page.locator(SELECTORS["convo_title"]).inner_text()
-            except:
+            except Exception as e:
+                print(f"Could not get conversation title for chat {idx+1}. Exception: {e}")
                 raw = f"chat_{idx+1}"
             safe = "".join(c for c in raw if c.isalnum() or c in " _-").strip()[:40]
             name = f"{idx+1:03d}_{safe}.pdf"
