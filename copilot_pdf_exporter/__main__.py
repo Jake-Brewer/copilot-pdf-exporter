@@ -1,5 +1,5 @@
 """
-export_copilot_pdfs.py
+copilot_pdf_exporter/__main__.py
 
 Export all Microsoft Copilot conversations to PDF using Playwright automation.
 
@@ -9,7 +9,7 @@ Features:
 - Robust UI interaction with retry prompts
 
 Usage:
-    python export_copilot_pdfs.py --save-dir "C:/path/to/save"
+    python -m copilot_pdf_exporter --save-dir "C:/path/to/save"
 """
 
 import argparse
@@ -18,8 +18,8 @@ from pathlib import Path
 from playwright.async_api import async_playwright, Page
 
 # 1. Configuration
-# SAVE_DIR = Path("C:/Users/Jake/Documents/CopilotPDFs")
-# SAVE_DIR.mkdir(parents=True, exist_ok=True)
+# save_dir = Path("C:/Users/Jake/Documents/CopilotPDFs")
+# save_dir.mkdir(parents=True, exist_ok=True)
 
 SELECTORS = {
     "history_toggle": "button[data-test-history-toggle]",
@@ -31,17 +31,14 @@ SELECTORS = {
 
 def wait_for_or_prompt_docstring() -> None:
     """Helper to wait for a selector or prompt user to retry if not found."""
-    pass
 
 
 def export_all_docstring() -> None:
     """Core export routine to save all Copilot conversations as PDFs."""
-    pass
 
 
 def main_docstring() -> None:
     """CLI entry point for the Copilot PDF exporter script."""
-    pass
 
 
 # 2. Helper to wait for a selector or prompt retry
@@ -71,12 +68,12 @@ async def wait_for_or_prompt(
 
 
 # 3. Core export routine
-async def export_all(SAVE_DIR: Path) -> None:
+async def export_all(save_dir: Path) -> None:
     """
     Export all Copilot conversations to PDF files in the specified directory.
 
     Args:
-        SAVE_DIR (Path): Directory to save PDFs.
+        save_dir (Path): Directory to save PDFs.
     """
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=False)
@@ -127,7 +124,7 @@ async def export_all(SAVE_DIR: Path) -> None:
                 raw = f"chat_{idx+1}"
             safe = "".join(c for c in raw if c.isalnum() or c in " _-").strip()[:40]
             name = f"{idx+1:03d}_{safe}.pdf"
-            dest = SAVE_DIR / name
+            dest = save_dir / name
 
             # print to PDF
             await page.pdf(

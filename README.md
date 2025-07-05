@@ -1,5 +1,7 @@
 # 🚀 Copilot PDF Exporter
 
+> **Note:** This project requires **PowerShell 7+** and [Poetry](https://python-poetry.org/docs/#installation) for all dependency management and installation. Legacy PowerShell (5.1 or earlier) and pip/requirements.txt are not supported for advanced features.
+
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue?logo=python)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Tests](https://github.com/Jake-Brewer/copilot-pdf-exporter/actions/workflows/python-app.yml/badge.svg)](https://github.com/Jake-Brewer/copilot-pdf-exporter/actions)
@@ -28,15 +30,21 @@
 ## ⚡ Installation
 
 ```sh
+# Use PowerShell 7+ (pwsh) for all commands and scripts
+$ pwsh
+
+# Install Poetry (if not already installed)
+$ pipx install poetry
+
 # Clone the repository
 $ git clone https://github.com/Jake-Brewer/copilot-pdf-exporter.git
 $ cd copilot-pdf-exporter
 
-# Install dependencies
-$ pip install -r requirements.txt
+# Install dependencies with Poetry
+$ poetry install
 
 # Install Playwright browsers
-$ playwright install
+$ poetry run playwright install
 ```
 
 ---
@@ -44,7 +52,7 @@ $ playwright install
 ## 🚀 Usage
 
 ```sh
-python -m copilot_pdf_exporter --save-dir "C:/path/to/save"
+poetry run python -m copilot_pdf_exporter --save-dir "C:/path/to/save"
 ```
 
 ### More Usage Examples
@@ -52,13 +60,13 @@ python -m copilot_pdf_exporter --save-dir "C:/path/to/save"
 - Save to a custom directory:
 
   ```sh
-  python -m copilot_pdf_exporter --save-dir "D:/Backups/CopilotPDFs"
+  poetry run python -m copilot_pdf_exporter --save-dir "D:/Backups/CopilotPDFs"
   ```
 
 - Use the default directory:
 
   ```sh
-  python -m copilot_pdf_exporter
+  poetry run python -m copilot_pdf_exporter
   ```
 
 ---
@@ -68,15 +76,18 @@ python -m copilot_pdf_exporter --save-dir "C:/path/to/save"
 - The script will prompt you to log in and interact with the Copilot UI as needed.
 - Ensure you have Chromium installed via Playwright.
 - All PDFs are saved in the directory you specify with `--save-dir`.
+- This project is tested and supported only on PowerShell 7+ (`pwsh`) and Poetry.
+- Use `&&` and `||` for conditional chaining in all terminal commands and scripts.
+- See [Microsoft Docs: about_Pipeline_Chain_Operators](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipeline_chain_operators?view=powershell-7.4) for more info.
 
 ---
 
 ## 🛠️ Troubleshooting
 
 - **Playwright not installed:**
-  - Run `pip install -r requirements.txt` and `playwright install`.
+  - Run `poetry install` and `poetry run playwright install`.
 - **Chromium not found:**
-  - Run `playwright install` to ensure all browsers are available.
+  - Run `poetry run playwright install` to ensure all browsers are available.
 - **Permission errors on save:**
   - Make sure the save directory exists and you have write permissions.
 - **Selector not found errors:**
