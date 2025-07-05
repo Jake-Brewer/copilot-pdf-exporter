@@ -1,6 +1,5 @@
 import asyncio
 import argparse
-import time
 from pathlib import Path
 from playwright.async_api import async_playwright
 
@@ -97,11 +96,6 @@ async def export_all(SAVE_DIR):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--daily",
-        metavar="HH:MM",
-        help="Run export every day at this time (24-hour format).",
-    )
-    parser.add_argument(
         "--save-dir",
         metavar="PATH",
         default="C:/Users/Jake/Documents/CopilotPDFs",
@@ -115,22 +109,7 @@ def main():
     async def export_all_with_dir():
         await export_all(save_dir)
 
-    if args.daily:
-        import schedule
-
-        def job():
-            asyncio.run(export_all_with_dir())
-
-        schedule.every().day.at(args.daily).do(job)
-        print(f"Scheduled nightly export at {args.daily}. Press Ctrl+C to quit.")
-        try:
-            while True:
-                schedule.run_pending()
-                time.sleep(30)
-        except KeyboardInterrupt:
-            print("Scheduler stopped.")
-    else:
-        asyncio.run(export_all_with_dir())
+    asyncio.run(export_all_with_dir())
 
 
 if __name__ == "__main__":
