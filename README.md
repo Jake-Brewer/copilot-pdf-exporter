@@ -44,7 +44,7 @@ $ playwright install
 ## 🚀 Usage
 
 ```sh
-python export_copilot_pdfs.py --save-dir "C:/path/to/save"
+python -m copilot_pdf_exporter --save-dir "C:/path/to/save"
 ```
 
 ### More Usage Examples
@@ -52,13 +52,13 @@ python export_copilot_pdfs.py --save-dir "C:/path/to/save"
 - Save to a custom directory:
 
   ```sh
-  python export_copilot_pdfs.py --save-dir "D:/Backups/CopilotPDFs"
+  python -m copilot_pdf_exporter --save-dir "D:/Backups/CopilotPDFs"
   ```
 
 - Use the default directory:
 
   ```sh
-  python export_copilot_pdfs.py
+  python -m copilot_pdf_exporter
   ```
 
 ---

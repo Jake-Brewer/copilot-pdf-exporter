@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "copilot_pdf_exporter"
+version = "1.0.0"
+description = "Export all your Microsoft Copilot conversations to PDF using Playwright automation."
+authors = [{ name = "Jake Brewer" }]
+requires-python = ">=3.8"
+dependencies = ["playwright"]
+
+[project.scripts]
+copilot-pdf-exporter = "copilot_pdf_exporter.__main__:main"
